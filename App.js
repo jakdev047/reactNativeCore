@@ -1,16 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import ListItem from './components/ListItem/ListItem';
 
 export default function App() {
   const [inputValue, setInputValue] = useState('');
   const [placeList, setPlaceList] = useState([]);
-  const listPlace = placeList.map((itm, i) => {
-    return (
-      <ListItem placeName={itm} key={i} onItemPressed={() => alert(itm)} />
-    )
-  })
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -33,9 +28,12 @@ export default function App() {
             if (inputValue !== '') {
               setPlaceList([
                 ...placeList,
-                inputValue
+                {
+                  key: Math.random().toString(),
+                  value: inputValue
+                }
               ])
-              setInputValue('');
+              // setInputValue('');
             }
             else {
               alert('Please enter corect place')
@@ -44,11 +42,17 @@ export default function App() {
           }}
         />
       </View>
-      <ScrollView style={{ width: '100%' }}>
-        <View style={{alignItems:'center',justifyContent:'center'}}>
-          {listPlace}
-        </View>
-      </ScrollView>
+      <FlatList 
+        style={{ width: '100%',textAlign: 'center' }}
+        data={placeList}
+        renderItem={info=>{
+          return (
+            <ListItem placeName={info.item.value} onItemPressed={() => alert(info.item.value)} />
+          )
+        }}
+        keyExtractor={item => item.key}
+
+      />
     </View>
   );
 }

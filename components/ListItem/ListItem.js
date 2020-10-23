@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
 });
 
 const ListItem = ({placeName,onItemPressed}) => {
+    console.log("data",placeName)
     return (
         // onLongPress
         <Pressable onPress={onItemPressed}>
