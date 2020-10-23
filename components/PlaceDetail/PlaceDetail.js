@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Button, Modal, Text, View } from 'react-native';
+import { StyleSheet, Button, Modal, Text, View, Image } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,13 +15,15 @@ const styles = StyleSheet.create({
 });
 
 
-const PlaceDetail = ({ place }) => {
+const PlaceDetail = ({ place,handleHideModal }) => {
     return (
         <Modal style={styles.container}>
             <View>
+                <Image source={place.image} style={{width:'100%',height:300}}/>
                 <Text style={styles.textStyles}>{place.value}</Text>
                 <View>
-                    <Button title="Delete" />
+                    <Button title="Delete"  color="red"/>
+                    <Button title="close"  onPress={()=>handleHideModal()}/>
                 </View>
             </View>
         </Modal>

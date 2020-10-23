@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button,  StyleSheet, TextInput, View } from 'react-native';
+import myImage from '../../assets/images/0burger.jpg';
 
 const styles = StyleSheet.create({
     inputView: {
@@ -9,7 +10,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     }
 });
-
 
 const InputPlace = props => {
     return (
@@ -33,7 +33,8 @@ const InputPlace = props => {
                             ...props.placeList,
                             {
                                 key: Math.random().toString(),
-                                value: props.inputValue
+                                value: props.inputValue,
+                                image: myImage
                             }
                         ])
                         props.setInputValue('');

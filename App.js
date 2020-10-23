@@ -18,9 +18,13 @@ export default function App() {
     setSeletedPlace(place);
   }
 
+  const handleHideModal = () =>{
+    alert('close')
+  }
+
   let placeDetail = null;
   if( seletedPlace !== null) {
-    placeDetail = <PlaceDetail place={seletedPlace} />
+    placeDetail = <PlaceDetail place={seletedPlace} handleHideModal={handleHideModal} />
   }
 
   return (
