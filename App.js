@@ -1,10 +1,16 @@
 // import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import ListItem from './components/ListItem/ListItem';
 
 export default function App() {
   const [inputValue, setInputValue] = useState('');
   const [placeList, setPlaceList] = useState([]);
+  const listPlace = placeList.map((itm, i) => {
+    return (
+      <ListItem placeName={itm} key={i}/>
+    )
+  })
   return (
     <View style={styles.container}>
       <Text style={styles.textStyles}>Hello React Native</Text>
@@ -37,6 +43,7 @@ export default function App() {
           }}
         />
       </View>
+      <View style={styles.container}>{listPlace}</View>
 
       {/* <StatusBar style="auto" /> */}
     </View>
