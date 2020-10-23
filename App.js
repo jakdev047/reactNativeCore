@@ -1,58 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
-import ListItem from './components/ListItem/ListItem';
+import { StyleSheet, Text, View } from 'react-native';
+import InputPlace from './components/InputPlace/InputPlace';
+import PlaceList from './components/PlaceList/PlaceList';
 
 export default function App() {
+
   const [inputValue, setInputValue] = useState('');
   const [placeList, setPlaceList] = useState([]);
+
   return (
     <View style={styles.container}>
+
       <StatusBar style="auto" />
+
       <Text style={styles.textStyles}>Hello React Native</Text>
-      <View style={styles.inputView}>
-        <TextInput
-          style={{
-            width: 200,
-            borderBottomWidth: 1,
-            borderColor: 'green',
-            padding: 7
-          }}
-          placeholder="Add a Place..."
-          value={inputValue}
-          onChangeText={text => setInputValue(text)}
-        />
-        <Button
-          title="Add"
-          onPress={() => {
-            if (inputValue !== '') {
-              setPlaceList([
-                ...placeList,
-                {
-                  key: Math.random().toString(),
-                  value: inputValue
-                }
-              ])
-              // setInputValue('');
-            }
-            else {
-              alert('Please enter corect place')
-            }
 
-          }}
-        />
-      </View>
-      <FlatList 
-        style={{ width: '100%',textAlign: 'center' }}
-        data={placeList}
-        renderItem={info=>{
-          return (
-            <ListItem placeName={info.item.value} onItemPressed={() => alert(info.item.value)} />
-          )
-        }}
-        keyExtractor={item => item.key}
-
+      <InputPlace
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        placeList={placeList}
+        setPlaceList={setPlaceList}
       />
+
+      <PlaceList
+        placeList={placeList}
+      />
+
     </View>
   );
 }
@@ -68,11 +42,5 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 34,
     marginTop: 50
-  },
-  inputView: {
-    marginTop: 30,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
   }
 });
