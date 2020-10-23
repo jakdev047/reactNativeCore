@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button,  StyleSheet, TextInput, View } from 'react-native';
-import myImage from '../../assets/images/0burger.jpg';
+// import myImage from '../../assets/images/0burger.jpg';
 
 const styles = StyleSheet.create({
     inputView: {
@@ -34,7 +34,9 @@ const InputPlace = props => {
                             {
                                 key: Math.random().toString(),
                                 value: props.inputValue,
-                                image: myImage
+                                image: {
+                                    uri: 'https://i.ytimg.com/vi/YxpAQcq5-y0/maxresdefault.jpg'
+                                }
                             }
                         ])
                         props.setInputValue('');

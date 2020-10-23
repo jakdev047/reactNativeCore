@@ -19,12 +19,19 @@ export default function App() {
   }
 
   const handleHideModal = () =>{
-    alert('close')
+    setSeletedPlace(null);
+  }
+
+  const handleDeleteItem = key => {
+    setPlaceList([
+      ...placeList.filter(item=>item.key !== key)
+    ]);
+    setSeletedPlace(null);
   }
 
   let placeDetail = null;
   if( seletedPlace !== null) {
-    placeDetail = <PlaceDetail place={seletedPlace} handleHideModal={handleHideModal} />
+    placeDetail = <PlaceDetail place={seletedPlace} handleHideModal={handleHideModal} handleDeleteItem={handleDeleteItem} />
   }
 
   return (

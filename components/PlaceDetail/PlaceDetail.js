@@ -15,14 +15,14 @@ const styles = StyleSheet.create({
 });
 
 
-const PlaceDetail = ({ place,handleHideModal }) => {
+const PlaceDetail = ({ place,handleHideModal,handleDeleteItem }) => {
     return (
         <Modal style={styles.container}>
             <View>
                 <Image source={place.image} style={{width:'100%',height:300}}/>
                 <Text style={styles.textStyles}>{place.value}</Text>
                 <View>
-                    <Button title="Delete"  color="red"/>
+                    <Button title="Delete"  color="red" onPress={()=>handleDeleteItem(place.key)}/>
                     <Button title="close"  onPress={()=>handleHideModal()}/>
                 </View>
             </View>
