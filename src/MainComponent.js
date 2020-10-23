@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import InputPlace from './components/InputPlace/InputPlace';
 import PlaceDetail from './components/PlaceDetail/PlaceDetail';
 import PlaceList from './components/PlaceList/PlaceList';
-import { addPlace } from './redux/actions/places';
+import { addPlace,deletePlace } from './redux/actions/places';
 
 const styles = StyleSheet.create({
     container: {
@@ -38,9 +38,7 @@ const MainComponent = props => {
     }
 
     const handleDeleteItem = key => {
-        setPlaceList([
-            ...props.placeList.filter(item => item.key !== key)
-        ]);
+        props.deletePlace(key)
         setSeletedPlace(null);
     }
 
@@ -48,7 +46,7 @@ const MainComponent = props => {
     if (seletedPlace !== null) {
         placeDetail = <PlaceDetail place={seletedPlace} handleHideModal={handleHideModal} handleDeleteItem={handleDeleteItem} />
     }
-    return (
+    return ( 
         <View style={styles.container}>
 
             <StatusBar style="auto" />
@@ -76,7 +74,8 @@ const MainComponent = props => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addPlace: place => dispatch(addPlace(place))
+        addPlace: place => dispatch(addPlace(place)),
+        deletePlace: key => dispatch(deletePlace(key)),
     }
 }
 

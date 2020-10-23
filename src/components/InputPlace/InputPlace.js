@@ -29,16 +29,13 @@ const InputPlace = props => {
                 title="Add"
                 onPress={() => {
                     if (props.inputValue !== '') {
-                        props.addPlace([
-                            ...props.placeList,
-                            {
-                                key: Math.random().toString(),
-                                value: props.inputValue,
-                                image: {
-                                    uri: 'https://i.ytimg.com/vi/YxpAQcq5-y0/maxresdefault.jpg'
-                                }
+                        props.addPlace({
+                            key: Math.random().toString(),
+                            value: props.inputValue,
+                            image: {
+                                uri: 'https://i.ytimg.com/vi/YxpAQcq5-y0/maxresdefault.jpg'
                             }
-                        ])
+                        })
                         props.setInputValue('');
                     }
                     else {
