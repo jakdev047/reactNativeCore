@@ -1,20 +1,23 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableWithoutFeedback, Pressable } from 'react-native';
 
 const styles = StyleSheet.create({
     textProperty: {
         color: 'green',
-        fontSize: '24px'
+        fontSize: 24
     }
 });
 
-const ListItem = ({placeName}) => {
+const ListItem = ({placeName,onItemPressed}) => {
     return (
+        // onLongPress
+        <Pressable onPress={onItemPressed}>
         <View>
             <Text style={styles.textProperty}>
                 {placeName}
             </Text>
         </View>
+        </Pressable>
     )
 }
 

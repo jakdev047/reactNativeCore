@@ -1,6 +1,6 @@
-// import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import ListItem from './components/ListItem/ListItem';
 
 export default function App() {
@@ -8,11 +8,12 @@ export default function App() {
   const [placeList, setPlaceList] = useState([]);
   const listPlace = placeList.map((itm, i) => {
     return (
-      <ListItem placeName={itm} key={i}/>
+      <ListItem placeName={itm} key={i} onItemPressed={() => alert(itm)} />
     )
   })
   return (
     <View style={styles.container}>
+      <StatusBar style="auto" />
       <Text style={styles.textStyles}>Hello React Native</Text>
       <View style={styles.inputView}>
         <TextInput
@@ -43,9 +44,11 @@ export default function App() {
           }}
         />
       </View>
-      <View style={styles.container}>{listPlace}</View>
-
-      {/* <StatusBar style="auto" /> */}
+      <ScrollView style={{ width: '100%' }}>
+        <View style={{alignItems:'center',justifyContent:'center'}}>
+          {listPlace}
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -59,7 +62,8 @@ const styles = StyleSheet.create({
   },
   textStyles: {
     color: 'red',
-    fontSize: '34px'
+    fontSize: 34,
+    marginTop: 50
   },
   inputView: {
     marginTop: 30,
