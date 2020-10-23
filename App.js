@@ -2,17 +2,33 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import InputPlace from './components/InputPlace/InputPlace';
+import PlaceDetail from './components/PlaceDetail/PlaceDetail';
 import PlaceList from './components/PlaceList/PlaceList';
 
 export default function App() {
 
   const [inputValue, setInputValue] = useState('');
   const [placeList, setPlaceList] = useState([]);
+  const [seletedPlace, setSeletedPlace] = useState(null);
+
+  const handleSelectedPlace = key => {
+    const place = placeList.find(place=>{
+      return place.key === key;
+    });
+    setSeletedPlace(place);
+  }
+
+  let placeDetail = null;
+  if( seletedPlace !== null) {
+    placeDetail = <PlaceDetail place={seletedPlace} />
+  }
 
   return (
     <View style={styles.container}>
 
       <StatusBar style="auto" />
+
+      {placeDetail}
 
       <Text style={styles.textStyles}>Hello React Native</Text>
 
@@ -25,6 +41,7 @@ export default function App() {
 
       <PlaceList
         placeList={placeList}
+        handleSelectedPlace={handleSelectedPlace}
       />
 
     </View>
