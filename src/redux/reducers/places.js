@@ -15,7 +15,7 @@ const reducers = (state=initialState,action) => {
         case DELETE_PLACE:
             return {
                 ...state,
-                placeList: state.placeList.filter(place=> place.key !== payload.key)
+                placeList: state.placeList.filter(place=> place.key !== payload)
             }
         default:
             return state;
