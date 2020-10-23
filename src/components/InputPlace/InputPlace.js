@@ -29,7 +29,7 @@ const InputPlace = props => {
                 title="Add"
                 onPress={() => {
                     if (props.inputValue !== '') {
-                        props.setPlaceList([
+                        props.addPlace([
                             ...props.placeList,
                             {
                                 key: Math.random().toString(),

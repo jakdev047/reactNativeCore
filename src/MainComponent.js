@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 import InputPlace from './components/InputPlace/InputPlace';
 import PlaceDetail from './components/PlaceDetail/PlaceDetail';
 import PlaceList from './components/PlaceList/PlaceList';
+import { addPlace } from './redux/actions/places';
 
 const styles = StyleSheet.create({
     container: {
@@ -22,11 +24,10 @@ const styles = StyleSheet.create({
 
 const MainComponent = props => {
     const [inputValue, setInputValue] = useState('');
-    const [placeList, setPlaceList] = useState([]);
     const [seletedPlace, setSeletedPlace] = useState(null);
 
     const handleSelectedPlace = key => {
-        const place = placeList.find(place => {
+        const place = props.placeList.find(place => {
             return place.key === key;
         });
         setSeletedPlace(place);
@@ -38,7 +39,7 @@ const MainComponent = props => {
 
     const handleDeleteItem = key => {
         setPlaceList([
-            ...placeList.filter(item => item.key !== key)
+            ...props.placeList.filter(item => item.key !== key)
         ]);
         setSeletedPlace(null);
     }
@@ -59,12 +60,12 @@ const MainComponent = props => {
             <InputPlace
                 inputValue={inputValue}
                 setInputValue={setInputValue}
-                placeList={placeList}
-                setPlaceList={setPlaceList}
+                placeList={props.placeList}
+                addPlace={props.addPlace}
             />
 
             <PlaceList
-                placeList={placeList}
+                placeList={props.placeList}
                 handleSelectedPlace={handleSelectedPlace}
             />
 
@@ -72,4 +73,17 @@ const MainComponent = props => {
     )
 }
 
-export default MainComponent;
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addPlace: place => dispatch(addPlace(place))
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        placeList: state.places.placeList
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MainComponent);

@@ -1,9 +1,17 @@
+import { ADD_PLACE } from "../actions/types";
+
 const initialState = {
-    places: null
+    placeList: []
 };
 
 const reducers = (state=initialState,action) => {
-    switch(action.type) {
+    const {type,payload} = action;
+    switch(type) {
+        case ADD_PLACE:
+            return {
+                ...state,
+                placeList: [payload,...state.placeList]
+            };
         default:
             return state;
     };
