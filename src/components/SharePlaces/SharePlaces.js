@@ -1,12 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { addPlace } from '../../redux/actions/places';
+import InputPlace from '../InputPlace/InputPlace';
 
-const SharePlaces = () => {
+const SharePlaces = props => {
+    const [inputValue, setInputValue] = useState('');
     return (
-        <View>
-            <Text>Share Places</Text>
-        </View>
+        <InputPlace
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            addPlace={props.addPlace}
+        />
     )
 };
 
-export default SharePlaces;
+const mapDispatchToProps = dispatch => {
+    return {
+        addPlace: place => dispatch(addPlace(place)),
+    }
+}
+
+export default connect(null,mapDispatchToProps)(SharePlaces);
