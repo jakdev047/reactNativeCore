@@ -25,25 +25,7 @@ const InputPlace = props => {
                 value={props.inputValue}
                 onChangeText={text => props.setInputValue(text)}
             />
-            <Button
-                title="Add"
-                onPress={() => {
-                    if (props.inputValue !== '') {
-                        props.addPlace({
-                            key: Math.random().toString(),
-                            value: props.inputValue,
-                            image: {
-                                uri: 'https://i.ytimg.com/vi/YxpAQcq5-y0/maxresdefault.jpg'
-                            }
-                        })
-                        props.setInputValue('');
-                    }
-                    else {
-                        alert('Please enter corect place')
-                    }
-
-                }}
-            />
+            
         </View>
     )
 };
