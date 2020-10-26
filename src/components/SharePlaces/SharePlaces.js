@@ -8,9 +8,26 @@ import PickImage from '../PickImage/PickImage';
 const SharePlaces = props => {
     const [inputValue, setInputValue] = useState('');
     const [image, setImage] = useState('');
+    const handleAddingPlace = () => {
+        if (inputValue === '' || image === '') {
+            if (image === '') {
+                alert('Pick an Image')
+            }
+        }
+        else {
+            props.addPlace({
+                key: Math.random().toString(),
+                value: inputValue,
+                image
+            })
+            setInputValue('');
+            setImage('');
+            props.navigation.navigate('Find Places');
+        }
+    }
     return (
         <View>
-            <PickImage image={image} setImage={setImage}/>
+            <PickImage image={image} setImage={setImage} />
             <View>
                 <InputPlace
                     inputValue={inputValue}
@@ -19,20 +36,7 @@ const SharePlaces = props => {
                 <Button
                     title="Add"
                     onPress={() => {
-                        if (inputValue !== '') {
-                            props.addPlace({
-                                key: Math.random().toString(),
-                                value: inputValue,
-                                image: {
-                                    uri: 'https://i.ytimg.com/vi/YxpAQcq5-y0/maxresdefault.jpg'
-                                }
-                            })
-                            setInputValue('');
-                        }
-                        else {
-                            alert('Please enter corect place')
-                        }
-
+                        handleAddingPlace();
                     }}
                 />
             </View>

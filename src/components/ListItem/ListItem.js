@@ -13,7 +13,7 @@ const ListItem = ({placeName,placeImage,onItemPressed}) => {
         // onLongPress
         <Pressable onPress={onItemPressed}>
         <View>
-            <Image style={{width:'100%',height:300}} source={placeImage}/>
+            <Image style={{width:150,height:150}} source={{uri:placeImage}}/>
             <Text style={styles.textProperty}>
                 {placeName}
             </Text>

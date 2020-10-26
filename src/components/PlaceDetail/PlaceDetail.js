@@ -15,12 +15,12 @@ const styles = StyleSheet.create({
     }
 });
 
-
+ 
 const PlaceDetail = ({ place, handleHideModal, handleDeleteItem }) => {
     return (
         <Modal style={styles.container}>
             <View>
-                <Image source={place.image} style={{ width: '100%', height: 300 }} />
+                <Image source={{uri:place.image}} style={{ width: '100%', height: 300 }} />
                 <Text style={styles.textStyles}>{place.value}</Text>
                 <View style={{alignItems:"center"}}>
                     <TouchableOpacity onPress={() => handleDeleteItem(place.key)}>
