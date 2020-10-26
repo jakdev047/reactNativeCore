@@ -7,9 +7,10 @@ import PickImage from '../PickImage/PickImage';
 
 const SharePlaces = props => {
     const [inputValue, setInputValue] = useState('');
+    const [image, setImage] = useState('');
     return (
         <View>
-            <PickImage />
+            <PickImage image={image} setImage={setImage}/>
             <View>
                 <InputPlace
                     inputValue={inputValue}
@@ -21,7 +22,7 @@ const SharePlaces = props => {
                         if (inputValue !== '') {
                             props.addPlace({
                                 key: Math.random().toString(),
-                                value: props.inputValue,
+                                value: inputValue,
                                 image: {
                                     uri: 'https://i.ytimg.com/vi/YxpAQcq5-y0/maxresdefault.jpg'
                                 }
