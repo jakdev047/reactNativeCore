@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import PlaceDetail from '../PlaceDetail/PlaceDetail';
 import PlaceList from '../PlaceList/PlaceList';
-import { deletePlace } from '../../redux/actions/places';
+import { deletePlace,loadPlaces } from '../../redux/actions/places';
 
 const styles = StyleSheet.create({
     container: {
@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
 
 const FindPlaces = props => {
     const [seletedPlace, setSeletedPlace] = useState(null);
+
+    useEffect(()=>{
+        props.loadPlaces();
+    });
 
     const handleSelectedPlace = key => {
         const place = props.placeList.find(place => {
@@ -66,6 +70,7 @@ const FindPlaces = props => {
 const mapDispatchToProps = dispatch => {
     return {
         deletePlace: key => dispatch(deletePlace(key)),
+        loadPlaces: () => dispatch(loadPlaces()),
     }
 }
 

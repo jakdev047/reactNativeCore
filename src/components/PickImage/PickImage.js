@@ -10,11 +10,11 @@ const PickImage = props => {
                 mediaTypes: ImagePicker.MediaTypeOptions.All,
                 allowsEditing: true,
                 aspect: [4,3],
-                quality: 1
+                quality: 1,
+                base64: true
             });
             if(!result.cancelled) {
-                props.setImage(result.uri);
-                console.log(result); // get image
+                props.setImage(`data:image/jpg;base64,${result.base64}`);
             }
         } catch (E) {
             console.log(E);

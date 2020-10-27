@@ -1,4 +1,4 @@
-import { ADD_PLACE, DELETE_PLACE } from "../actions/types";
+import { ADD_PLACE, DELETE_PLACE, SET_PLACE } from "../actions/types";
 
 const initialState = {
     placeList: []
@@ -16,6 +16,11 @@ const reducers = (state=initialState,action) => {
             return {
                 ...state,
                 placeList: state.placeList.filter(place=> place.key !== payload)
+            };
+        case SET_PLACE: 
+            return {
+                ...state,
+                placeList: payload
             }
         default:
             return state;
