@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Text, View, TextInput, StyleSheet,TouchableOpacity } from 'react-native';
+import { Button, Text, View, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import backgroundImage from '../../images/01.jpg';
 
 const styles = StyleSheet.create({
     loginView: {
@@ -43,31 +44,56 @@ const Login = props => {
             confirmPassword: ""
         }
     });
-    return (
-        <View style={styles.loginView}>
-            <TextInput
-                style={styles.input}
-                placeholder="Your Email Address"
-                value={authState?.inputs?.email}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={authState?.inputs?.password}
-            />
+    const switchViews = () => {
+        setAuthState({
+            ...authState,
+            mode: authState.mode === 'login' ? 'signup' : 'login'
+        })
+    }
+    let confirmPassField = null;
+    if (authState.mode === 'signup') {
+        confirmPassField = (
             <TextInput
                 style={styles.input}
                 placeholder="Confirm password"
                 value={authState?.inputs?.confirmPassword}
             />
-            <TouchableOpacity style={styles.btnContainer}>
-                <Text style={styles.btnStyle}>
-                    {
-                        authState.mode === 'login' ? "Login" : "Sign Up"
-                    }
-                </Text>
-            </TouchableOpacity>
-        </View>
+        )
+    }
+    return (
+        <ImageBackground source={backgroundImage} style={{width:'100%',flex:1}} blurRadius={3}>
+            <View style={styles.loginView}>
+                <TouchableOpacity
+                    style={styles.btnContainer}
+                    onPress={() => switchViews()}
+                >
+                    <Text style={styles.btnStyle}>
+                        {
+                            authState.mode === 'login' ? "Switch to Signup" : "Switch to Login"
+                        }
+                    </Text>
+                </TouchableOpacity>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Your Email Address"
+                    value={authState?.inputs?.email}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Password"
+                    value={authState?.inputs?.password}
+                />
+                {confirmPassField}
+                <TouchableOpacity style={styles.btnContainer}>
+                    <Text style={styles.btnStyle}>
+                        {
+                            authState.mode === 'login' ? "Login" : "Sign Up"
+                        }
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </ImageBackground>
+
     )
 };
 
