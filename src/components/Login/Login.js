@@ -75,11 +75,15 @@ const Login = props => {
         if (email !== "" && password !== "") {
             if (re.test(email)) {
                 if (authState.mode === "login") {
-                    props.navigation.navigate("Home");
+                    if(props.isAuth){
+                        props.navigation.navigate("Home");
+                    }else {
+                        alert("Login Failed!");
+                    }
+                    
                 } else {
                     if (password === confirmPassword) {
                         props.trySignup(email,password)
-                        props.navigation.navigate("Home");
                     } else {
                         alert("Password fields doesn't Match!");
                     }
@@ -146,5 +150,11 @@ const mapDispatchToProps = dispatch => {
     return {
         trySignup: (email,password) => dispatch(trySignup(email,password))
     }
+};
+
+const mapStateToProps = state => {
+    return {
+        isAuth: state.isAuth
+    }
 }
-export default connect(null,mapDispatchToProps)(Login);
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
