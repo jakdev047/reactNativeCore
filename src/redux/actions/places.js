@@ -1,7 +1,8 @@
 import { ADD_PLACE, DELETE_PLACE, SET_PLACE } from "./types";
 
-export const addPlace = place => dispatch => {
-    fetch("https://my-places-20029.firebaseio.com/places.json", {
+export const addPlace = place => (dispatch,getState) => {
+    let token = getState().token;
+    fetch(`https://my-places-20029.firebaseio.com/places.json?auth=${token}`, {
         method: "POST",
         body: JSON.stringify(place)
     })
@@ -18,8 +19,9 @@ export const setPlaces = places => {
     }
 };
 
-export const loadPlaces = () => dispatch => {
-    fetch("https://my-places-20029.firebaseio.com/places.json")
+export const loadPlaces = () => (dispatch,getState) => {
+    let token = getState().token;
+    fetch(`https://my-places-20029.firebaseio.com/places.json?auth=${token}`)
         .catch(error => {
             alert("Something Went Wrong,Soory")
             console.log(error)

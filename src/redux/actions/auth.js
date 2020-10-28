@@ -1,9 +1,10 @@
 import { navigate } from "../../../App";
 import { AUTHENTICATION_USER } from "./types";
 
-export const authUser = () => {
+export const authUser = token => {
     return {
-        type: AUTHENTICATION_USER
+        type: AUTHENTICATION_USER,
+        payload: token
     }
 }
 export const tryAuth = (email,password,mode) => dispatch => {
@@ -32,8 +33,9 @@ export const tryAuth = (email,password,mode) => dispatch => {
             alert(data.error.message)
         }
         else {
-            navigate("Home")
-            dispatch(authUser())
+            dispatch(authUser());
+            navigate("Home");
+           
         }
     })
     .catch(err => {

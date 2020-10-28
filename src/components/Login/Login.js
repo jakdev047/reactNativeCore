@@ -149,7 +149,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        isAuth: state.isAuth
+        isAuth: state.places.isAuth
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Login);
