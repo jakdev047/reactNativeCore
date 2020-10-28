@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Text, View, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import { connect } from 'react-redux';
 import backgroundImage from '../../images/01.jpg';
+import { trySignup } from '../../redux/actions/auth';
 
 const styles = StyleSheet.create({
     loginView: {
@@ -76,6 +78,7 @@ const Login = props => {
                     props.navigation.navigate("Home");
                 } else {
                     if (password === confirmPassword) {
+                        props.trySignup(email,password)
                         props.navigation.navigate("Home");
                     } else {
                         alert("Password fields doesn't Match!");
@@ -139,4 +142,9 @@ const Login = props => {
     )
 };
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+    return {
+        trySignup: (email,password) => dispatch(trySignup(email,password))
+    }
+}
+export default connect(null,mapDispatchToProps)(Login);
