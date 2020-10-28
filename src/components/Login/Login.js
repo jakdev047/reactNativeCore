@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Text, View, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import backgroundImage from '../../images/01.jpg';
-import { trySignup } from '../../redux/actions/auth';
+import { tryAuth } from '../../redux/actions/auth';
 
 const styles = StyleSheet.create({
     loginView: {
@@ -75,15 +75,10 @@ const Login = props => {
         if (email !== "" && password !== "") {
             if (re.test(email)) {
                 if (authState.mode === "login") {
-                    if(props.isAuth){
-                        props.navigation.navigate("Home");
-                    }else {
-                        alert("Login Failed!");
-                    }
-                    
+                    props.tryAuth(email,password,'login')
                 } else {
                     if (password === confirmPassword) {
-                        props.trySignup(email,password)
+                        props.tryAuth(email,password,'signup')
                     } else {
                         alert("Password fields doesn't Match!");
                     }
@@ -148,7 +143,7 @@ const Login = props => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        trySignup: (email,password) => dispatch(trySignup(email,password))
+        tryAuth: (email,password,mode) => dispatch(tryAuth(email,password,mode))
     }
 };
 

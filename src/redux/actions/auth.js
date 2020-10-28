@@ -6,9 +6,16 @@ export const authUser = () => {
         type: AUTHENTICATION_USER
     }
 }
-export const trySignup = (email,password) => dispatch => {
+export const tryAuth = (email,password,mode) => dispatch => {
+    let url = "";
     let apiKey = 'AIzaSyAwPBatDskWNHXa8IUcEggjke_fTwAagF8';
-    fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='+apiKey,{
+    if( mode == 'signup') {
+        url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='+apiKey;
+    }
+    else if ( mode == 'login') {
+        url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='+apiKey;
+    }
+    fetch(url,{
         method: 'POST',
         body: JSON.stringify({
             email,
