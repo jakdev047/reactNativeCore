@@ -27,19 +27,19 @@ export const tryAuth = (email,password,mode) => dispatch => {
             "Content-Type": "application/json"
         }
     })
+    .catch(err => {
+        console.log(err);
+        alert("Authentication Failed!")
+    })
     .then(res=> res.json())
     .then(data=>{
         if(data.error) {
             alert(data.error.message)
         }
         else {
-            dispatch(authUser());
+            dispatch(authUser(data.idToken));
             navigate("Home");
-           
         }
-    })
-    .catch(err => {
-        console.log(err);
-        alert("Authentication Failed!")
+        console.log(data)
     })
 }
