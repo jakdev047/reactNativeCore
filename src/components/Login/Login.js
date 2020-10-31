@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Text, View, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import backgroundImage from '../../images/01.jpg';
 import { tryAuth } from '../../redux/actions/auth';
+import { useIsFocused } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     loginView: {
@@ -46,6 +47,18 @@ const Login = props => {
             confirmPassword: ""
         }
     });
+    const isFocused = useIsFocused();
+
+    useEffect(()=>{
+        setAuthState({
+            ...authState,
+            inputs: {
+                email: "",
+                password: "",
+                confirmPassword: ""
+            }
+        })
+    },[isFocused])
     const switchViews = () => {
         setAuthState({
             ...authState,

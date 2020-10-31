@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Button, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { connect } from 'react-redux';
 
 const PickImage = props => {
     const handleImagePick = async () => {

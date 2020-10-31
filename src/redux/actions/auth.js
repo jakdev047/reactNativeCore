@@ -1,4 +1,4 @@
-import { navigate } from "../../../App";
+import { navigate } from "../../NavigationRoot";
 import { AUTHENTICATION_USER } from "./types";
 
 export const authUser = token => {
@@ -38,7 +38,7 @@ export const tryAuth = (email,password,mode) => dispatch => {
         }
         else {
             dispatch(authUser(data.idToken));
-            navigate("Home");
+            navigate("Places");
         }
         console.log(data)
     })
